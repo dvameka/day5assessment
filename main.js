@@ -49,7 +49,14 @@ app.get("/api/search",(req,res,next)=>{
  //                   resolve(this.saveToCache(searchTerm, fixedWidthUrls))
                         console.log(fixedWidthUrls);
  //                       res.send(`<h1>${fixedWidthUrls}</h1>`)
-                         res.render('search-giphy', { gifs: fixedWidthUrls });
+                        res.format({
+                         'text/html':()=>{
+                            res.render('search-giphy', { gifs: fixedWidthUrls });
+                            },
+                        'application/json':()=>{
+                            res.json(fixedWidthUrls);
+                            }
+                        })
                 }
                 );
                 
