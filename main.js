@@ -24,7 +24,8 @@ app.set('view engine', 'hbs');
 app.get("/api/search",(req,res,next)=>{
     const params = {
         api_key: 'wUmfQR2AH80n8BfXBvxkE4EWr10hj6JQ',
-        q: 'cat'
+        q: req.query.searchStr,
+        limit: req.query.count
     };
 
     const fixedWidthUrls = [];
@@ -34,7 +35,7 @@ app.get("/api/search",(req,res,next)=>{
     res.status(200);
     console.log(params);
     
-    request.get('https://api.giphy.com/v1/gifs/search?api_key=wUmfQR2AH80n8BfXBvxkE4EWr10hj6JQ&q=cat&limit=5', 
+    request.get('https://api.giphy.com/v1/gifs/search', {qs: params},
            
                 (err,respond, body)=>{
 
